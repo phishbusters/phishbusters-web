@@ -1,138 +1,99 @@
 <script lang="ts">
-	import type { ActionData } from './$types';
-	import { enhance } from '$app/forms';
-	import Input from '$lib/components/input/input.svelte';
-	import CheckBox from '$lib/components/check-box/check-box.svelte';
+	import illustrationUrl from '../assets/images/illustration.svg';
+	import { Input, CheckBox, Button } from '$lib/components';
+	import clsx from 'clsx';
+	import AppLogo from '$lib/components/app-logo/app-logo.svelte';
 	import Link from '$lib/components/link/link.svelte';
-	import ErrorLabel from '$lib/components/error-label/error-label.svelte';
-
-	export let form: ActionData;
-
-	let signInButtonLoading = false;
-	function onEnhanceSubmit() {
-		signInButtonLoading = true;
-
-		return async ({ update }: { update: () => Promise<void> }) => {
-			await update();
-			signInButtonLoading = false;
-		};
-	}
 </script>
 
-<section class="h-screen">
-	<div class="h-full px-6 py-24">
-		<div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-			<!-- Left column container with background-->
-			<div class="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-				<img
-					src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
-					class="w-full"
-					alt="Phone"
-				/>
-			</div>
-
-			<!-- Right column container with form -->
-			<div class="md:w-8/12 lg:ml-6 lg:w-5/12">
-				<form action="/login" method="POST" use:enhance={onEnhanceSubmit}>
-					<!-- Email input -->
-					<div class="relative mb-6" data-te-input-wrapper-init>
-						<Input
-							name="email"
-							id="exampleFormControlInput3"
-							placeholder="Email"
-							autocomplete="email"
+<div>
+	<div
+		class={clsx([
+			'-m-3 sm:-mx-8 p-3 sm:px-8 relative h-screen lg:overflow-hidden bg-primary xl:bg-white dark:bg-darkmode-800 xl:dark:bg-darkmode-600',
+			"before:hidden before:xl:block before:content-[''] before:w-[57%] before:-mt-[28%] before:-mb-[16%] before:-ml-[13%] before:absolute before:inset-y-0 before:left-0 before:transform before:rotate-[-4.5deg] before:bg-primary/20 before:rounded-[100%] before:dark:bg-darkmode-400",
+			"after:hidden after:xl:block after:content-[''] after:w-[57%] after:-mt-[20%] after:-mb-[13%] after:-ml-[13%] after:absolute after:inset-y-0 after:left-0 after:transform after:rotate-[-4.5deg] after:bg-primary after:rounded-[100%] after:dark:bg-darkmode-700"
+		])}
+	>
+		<div class="container relative z-10 sm:px-10">
+			<div class="block grid-cols-2 gap-4 xl:grid">
+				<div class="flex-col hidden min-h-screen xl:flex">
+					<a href="#top" class="flex items-center pt-5 -intro-x">
+						<AppLogo />
+					</a>
+					<div class="my-auto">
+						<img
+							alt="Midone Tailwind HTML Admin Template"
+							class="w-1/2 -mt-16 -intro-x"
+							src={illustrationUrl}
 						/>
-					</div>
-
-					<!-- Password input -->
-					<div class="relative mb-6" data-te-input-wrapper-init>
-						<Input
-							name="password"
-							type="password"
-							id="exampleFormControlInput33"
-							placeholder="Password"
-							autocomplete="current-password"
-						/>
-					</div>
-
-					<!-- Remember me checkbox -->
-					<div class="mb-6 flex items-center justify-between">
-						<div class="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
-							<CheckBox label="Recuerdame" id="exampleCheck3" />
+						<div class="mt-10 text-4xl font-medium leading-tight text-white -intro-x">
+							A few more clicks to <br />
+							sign in to your account.
 						</div>
-
-						<!-- Forgot password link -->
-						<Link href="#" label="Olvidaste tu contraseña" />
-					</div>
-
-					{#if form?.errorMessage}
-						<div class="mb-6 flex items-center justify-center">
-							<ErrorLabel message={form.errorMessage} />
+						<div class="mt-5 text-lg text-white -intro-x text-opacity-70 dark:text-slate-400">
+							Unos pasos más para acceder a tu cuenta. Protege tus activos digitales con nuestro
+							software de detección de phishing respaldado por modelos de Aprendizaje Automático.
 						</div>
-					{/if}
-
-					<!-- Submit button -->
-					<button
-						type="submit"
-						class="inline-block w-full rounded bg-blue-800 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-						data-te-ripple-init
-						data-te-ripple-color="light"
-					>
-						Iniciar sesión
-					</button>
-
-					<!-- Divider -->
+					</div>
+				</div>
+				<div class="flex h-screen py-5 my-10 xl:h-auto xl:py-0 xl:my-0">
 					<div
-						class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300"
+						class="w-full px-5 py-8 mx-auto my-auto bg-white rounded-md shadow-md xl:ml-20 dark:bg-darkmode-600 xl:bg-transparent sm:px-8 xl:p-0 xl:shadow-none sm:w-3/4 lg:w-2/4 xl:w-auto"
 					>
-						<p class="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">O</p>
+						<h2 class="text-2xl font-bold text-center intro-x xl:text-3xl xl:text-left">
+							Ingresá con tu cuenta
+						</h2>
+						<div class="mt-2 text-center intro-x text-slate-400 xl:hidden">
+							Unos pasos más para acceder a tu cuenta. Protege tus activos digitales con nuestro
+							software de detección de phishing respaldado por modelos de Aprendizaje Automático.
+						</div>
+						<div class="mt-8 intro-x">
+							<Input
+								type="text"
+								class="block px-4 py-3 intro-x min-w-full xl:min-w-[350px]"
+								placeholder="Email"
+							/>
+							<Input
+								type="password"
+								class="block px-4 py-3 mt-4 intro-x min-w-full xl:min-w-[350px]"
+								placeholder="Password"
+							/>
+						</div>
+						<div class="flex mt-4 text-xs intro-x text-slate-600 dark:text-slate-500 sm:text-sm">
+							<div class="flex items-center mr-auto">
+								<CheckBox
+									labelClassName="cursor-pointer select-none"
+									id="remember-me"
+									type="checkbox"
+									class="mr-2 border"
+								>
+									Remember me
+								</CheckBox>
+							</div>
+							<Link label="Olvidaste tu contraseña?" href="#top" />
+						</div>
+						<div class="mt-5 text-center intro-x xl:mt-8 xl:text-left">
+							<Button variant="primary" class="w-full px-4 py-3 align-top xl:w-32 xl:mr-3">
+								Iniciar sesión
+							</Button>
+							<Button
+								variant="outline-secondary"
+								class="w-full px-4 py-3 mt-3 align-top xl:w-32 xl:mt-0"
+							>
+								Registrar nueva cuenta
+							</Button>
+						</div>
+						<div
+							class="mt-10 text-center intro-x xl:mt-24 text-slate-600 dark:text-slate-500 xl:text-left"
+						>
+							Al registrarte, aceptas nuestros
+							<a class="text-primary dark:text-slate-200" href="#top"> terminos y condiciones </a>
+							&
+							<a class="text-primary dark:text-slate-200" href="#top"> politicas de privacidad </a>
+						</div>
 					</div>
-
-					<!-- Social login buttons -->
-					<a
-						class="mb-3 flex w-full items-center justify-center rounded bg-primary px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-						style="background-color: #3b5998"
-						href="#!"
-						role="button"
-						data-te-ripple-init
-						data-te-ripple-color="light"
-					>
-						<!-- Facebook -->
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="mr-2 h-3.5 w-3.5"
-							fill="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
-							/>
-						</svg>
-						Continue with Facebook
-					</a>
-					<a
-						class="mb-3 flex w-full items-center justify-center rounded bg-info px-7 pb-2.5 pt-3 text-center text-sm font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]"
-						style="background-color: #55acee"
-						href="#!"
-						role="button"
-						data-te-ripple-init
-						data-te-ripple-color="light"
-					>
-						<!-- Twitter -->
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="mr-2 h-3.5 w-3.5"
-							fill="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
-							/>
-						</svg>
-						Continue with Twitter
-					</a>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
-</section>
+</div>

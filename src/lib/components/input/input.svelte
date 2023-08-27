@@ -1,23 +1,60 @@
+<script context="module" lang="ts">
+	import { getContext } from 'svelte';
+	import { twMerge } from 'tailwind-merge';
+	import type { HTMLInputAttributes } from 'svelte/elements';
+
+	export interface FormInputProps extends HTMLInputAttributes {
+		className?: string;
+		formInputSize?: 'sm' | 'lg';
+		rounded?: boolean;
+		ref?: HTMLInputElement;
+	}
+</script>
+
 <script lang="ts">
-	export let type: HTMLInputElement['type'] = 'text';
-	export let inputExtraClass = '';
-	export let labelExtraClass = '';
-	export let id: string | null | undefined = null;
-	export let name: string | null | undefined = null;
-	export let placeholder: string | null | undefined = null;
-	export let autocomplete: string | null | undefined = 'off';
+	let className: FormInputProps['className'] = undefined;
+	let formInputSize: FormInputProps['formInputSize'] = undefined;
+	let rounded: FormInputProps['rounded'] = undefined;
+	let ref: FormInputProps['ref'] = undefined;
+	let value: FormInputProps['value'] = undefined;
+
+	export { className as class, formInputSize, rounded, ref, value };
 </script>
 
 <input
-	{type}
-	class={`${inputExtraClass} peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
-	{name}
-	{id}
-	{placeholder}
-	{autocomplete}
+	{...$$props}
+	class={twMerge([
+		'disabled:bg-slate-100 disabled:cursor-not-allowed dark:disabled:bg-darkmode-800/50 dark:disabled:border-transparent',
+		'[&[readonly]]:bg-slate-100 [&[readonly]]:cursor-not-allowed [&[readonly]]:dark:bg-darkmode-800/50 [&[readonly]]:dark:border-transparent',
+		'transition duration-200 ease-in-out w-full text-sm border-slate-200 shadow-sm rounded-md placeholder:text-slate-400/90 focus:ring-4 focus:ring-primary focus:ring-opacity-20 focus:border-primary focus:border-opacity-40 dark:bg-darkmode-800 dark:border-transparent dark:focus:ring-slate-700 dark:focus:ring-opacity-50 dark:placeholder:text-slate-500/80',
+		formInputSize == 'sm' && 'text-xs py-1.5 px-2',
+		formInputSize == 'lg' && 'text-lg py-1.5 px-4',
+		rounded && 'rounded-full',
+		// formInline && "flex-1",
+		// inputGroup &&
+		//   "rounded-none [&:not(:first-child)]:border-l-transparent first:rounded-l last:rounded-r z-10",
+		className
+	])}
+	on:blur
+	on:change
+	on:contextmenu
+	on:focus
+	on:input
+	on:invalid
+	on:reset
+	on:select
+	on:submit
+	on:keydown
+	on:keypress
+	on:keyup
+	on:click
+	on:dblclick
+	on:mousedown
+	on:mousemove
+	on:mouseout
+	on:mouseover
+	on:mouseup
+	on:wheel
+	bind:this={ref}
+	bind:value
 />
-<label
-	for={id}
-	class={`${labelExtraClass} pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary`}
-	>Email address
-</label>
