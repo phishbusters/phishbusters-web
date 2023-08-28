@@ -1,5 +1,4 @@
 <script context="module" lang="ts">
-	import { getContext } from 'svelte';
 	import { twMerge } from 'tailwind-merge';
 	import type { HTMLInputAttributes } from 'svelte/elements';
 

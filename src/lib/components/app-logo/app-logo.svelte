@@ -1,5 +1,5 @@
 <script lang="ts">
-  import logoUrl from "../../assets/images/phishbuster-logo.svg";
+	import logoUrl from '../../assets/images/phishbuster-logo.svg';
 </script>
 
-<img alt="Logo" class="w-6" src={logoUrl} />
+<img alt="Logo" class="w-50" src={logoUrl} />

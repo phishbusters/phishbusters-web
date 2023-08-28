@@ -36,6 +36,7 @@
 
 	interface ButtonProps {
 		as?: string | typeof SvelteComponent;
+		type: 'button' | 'submit' | 'reset';
 		className?: string;
 		variant?: Variant;
 		elevated?: Elevated;
@@ -44,6 +45,7 @@
 		ref?: HTMLElement;
 	}
 
+	let type: ButtonProps['type'] = 'button';
 	let as: ButtonProps['as'] = 'button';
 	let className: ButtonProps['className'] = undefined;
 	let variant: ButtonProps['variant'] = undefined;
@@ -52,7 +54,7 @@
 	let rounded: ButtonProps['rounded'] = undefined;
 	let ref: ButtonProps['ref'] = undefined;
 
-	export { as, className as class, variant, elevated, size, rounded, ref };
+	export { as, className as class, variant, elevated, size, rounded, ref, type };
 
 	// General Styles
 	const generalStyles = [
@@ -189,6 +191,7 @@
 
 <Component
 	{...$$props}
+	{type}
 	as={as || 'button'}
 	class={twMerge([
 		generalStyles,

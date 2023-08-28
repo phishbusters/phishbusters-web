@@ -4,6 +4,7 @@
 
 	export interface InputProps extends HTMLInputAttributes {
 		className?: string;
+		id: HTMLInputElement['id'];
 		type: 'radio' | 'checkbox';
 		ref?: HTMLInputElement;
 	}
@@ -15,8 +16,9 @@
 	let type: InputProps['type'];
 	let ref: InputProps['ref'] = undefined;
 	let value: InputProps['value'] = undefined;
+	let id: InputProps['id'] = '';
 
-	export { className as class, type, ref, value, labelClassName };
+	export { className as class, type, ref, value, labelClassName, id };
 </script>
 
 <input
@@ -68,6 +70,3 @@
 	bind:this={ref}
 	bind:value
 />
-<label for={ref.name} class={twMerge(['cursor-pointer ml-2', labelClassName])} {...$$props}>
-	<slot />
-</label>

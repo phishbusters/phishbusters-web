@@ -3,8 +3,8 @@ const tailwindcss = require('tailwindcss');
 const autoprefixer = require('autoprefixer');
 const postCssImport = require('postcss-import');
 const advancedVariables = require('postcss-advanced-variables');
-const nesting = require('postcss-nesting');
+const nesting = require('@tailwindcss/nesting');
 
 module.exports = {
-	plugins: [tailwindcss(), autoprefixer(), postCssImport(), advancedVariables(), nesting()]
+	plugins: [nesting(), autoprefixer(), postCssImport(), advancedVariables(), tailwindcss()]
 };
