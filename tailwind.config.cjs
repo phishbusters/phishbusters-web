@@ -106,20 +106,6 @@ module.exports = {
 					'--color-light': toRGB(colors.slate['100']),
 					'--color-dark': toRGB(colors.slate['800'])
 				},
-				// Default dark-mode colors
-				'.dark': {
-					'--color-primary': toRGB(colors.emerald['800']),
-					'--color-darkmode-50': '87 103 132',
-					'--color-darkmode-100': '74 90 121',
-					'--color-darkmode-200': '65 81 114',
-					'--color-darkmode-300': '53 69 103',
-					'--color-darkmode-400': '48 61 93',
-					'--color-darkmode-500': '41 53 82',
-					'--color-darkmode-600': '40 51 78',
-					'--color-darkmode-700': '35 45 69',
-					'--color-darkmode-800': '27 37 59',
-					'--color-darkmode-900': '15 23 42'
-				},
 				// Theme 1 colors
 				'.theme-1': {
 					'--color-primary': toRGB(colors.blue['800']),

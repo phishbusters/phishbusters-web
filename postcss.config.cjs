@@ -6,5 +6,5 @@ const advancedVariables = require('postcss-advanced-variables');
 const nesting = require('@tailwindcss/nesting');
 
 module.exports = {
-	plugins: [nesting(), autoprefixer(), postCssImport(), advancedVariables(), tailwindcss()]
+	plugins: [postCssImport(), advancedVariables(), nesting(), tailwindcss(), autoprefixer()]
 };

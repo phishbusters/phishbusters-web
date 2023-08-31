@@ -1,11 +1,13 @@
-import { error } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
 
 export const load = (async ({ locals }) => {
-	const session = locals.username;
-	if (!session) {
-		throw error(401, 'Lo que estas buscando no existe.');
-	}
+	// const session = locals.jwt;
+	// if (!session) {
+	// 	throw redirect(302, '/login');
+	// }
 
-	return {};
+	return {
+		showNavbar: !locals.user.flags?.shouldSeeOnboarding || false
+	};
 }) satisfies LayoutServerLoad;

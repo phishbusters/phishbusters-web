@@ -16,7 +16,7 @@ export const actions: Actions = {
 			if (loginApi.success && loginApi.data) {
 				const { token } = loginApi.data;
 				newSession(cookies, email, token);
-				throw redirect(302, '/home');
+				throw redirect(302, '/');
 			} else {
 				return {
 					email,

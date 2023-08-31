@@ -17,9 +17,8 @@ type CreateUser = {
 };
 // type UpdateUser = Pick<User, 'email' | 'location' | 'dni' | 'firstName' | 'lastName'>;
 export const user = {
-	me: async (jwt: string) => await authenticatedGet<User>('/user/me', jwt),
-	create: async (newUser: CreateUser) =>
-		await unauthenticatedPost<User>('/user/register/companies', newUser)
+	me: async (jwt: string) => await authenticatedGet<User>('/user', jwt),
+	create: async (newUser: CreateUser) => await unauthenticatedPost<{ user: User }>('/user', newUser)
 	// update: async (jwt: string, updatedUser: UpdateUser) =>
-	// 	await authenticatedPut<User>('/api/users', jwt, updatedUser)
+	// 	await authenticatedPut<User>('/user', jwt, updatedUser)
 };

@@ -11,14 +11,12 @@
 </script>
 
 <script lang="ts">
-	let labelClassName: InputProps['className'] = undefined;
 	let className: InputProps['className'] = undefined;
 	let type: InputProps['type'];
 	let ref: InputProps['ref'] = undefined;
 	let value: InputProps['value'] = undefined;
-	let id: InputProps['id'] = '';
 
-	export { className as class, type, ref, value, labelClassName, id };
+	export { className as class, type, ref, value };
 </script>
 
 <input

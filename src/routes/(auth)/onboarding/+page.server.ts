@@ -2,10 +2,10 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ locals }) => {
-	const session = locals.username;
-	if (session) {
-		throw redirect(307, '/home');
-	} else {
-		throw redirect(307, '/login');
+	const showOnboarding = locals.user.flags.shouldSeeOnboarding;
+	if (!showOnboarding) {
+		throw redirect(302, '/');
 	}
+
+	return {};
 }) satisfies PageServerLoad;

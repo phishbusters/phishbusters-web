@@ -93,6 +93,7 @@
 					id="rememberMe"
 					type="checkbox"
 					class="mr-2 border"
+					bind:checked={tcChecked}
 				/>
 				<label class="cursor-pointer select-none" for="rememberMe">
 					Estoy de acuerdo con<a class="ml-1 text-primary dark:text-slate-200" href="#top">

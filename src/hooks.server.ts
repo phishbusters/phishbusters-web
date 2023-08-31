@@ -1,9 +1,9 @@
 import { apiEndpoints } from '$lib/api';
+import type { User } from '$lib/api/types';
 import { jwtCookie } from '$lib/server/cookie-manager';
-import type { User } from '$lib/types/user';
 import type { Handle } from '@sveltejs/kit';
 
-const handleSession = async (jwt?: string): Promise<User | null> => {
+const getUserSessionData = async (jwt?: string): Promise<User | null> => {
 	if (!jwt) {
 		return null;
 	}
@@ -15,9 +15,10 @@ const handleSession = async (jwt?: string): Promise<User | null> => {
 export const handle = (async ({ event, resolve }) => {
 	const { cookies, locals } = event;
 	const jwt = cookies.get(jwtCookie);
-	const session = await handleSession(jwt);
-	if (session) {
-		locals.username = session.username;
+	const userData = await getUserSessionData(jwt);
+	if (userData) {
+		locals.user = userData;
+		locals.jwt = jwt;
 	}
 
 	return await resolve(event);

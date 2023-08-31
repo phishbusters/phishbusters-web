@@ -1,13 +1,29 @@
 import { writable } from 'svelte/store';
+import type { Icon } from '$lib/components/lucide-icons/lucide.svelte';
 
-const sidebarOpen = writable(false);
+export interface Menu {
+	icon: Icon;
+	title: string;
+	pathname?: string;
+	subMenu?: Menu[];
+	ignore?: boolean;
+}
 
-const openSidebar = () => {
-	sidebarOpen.update(() => true);
-};
+export interface SideMenuState {
+	menu: Array<Menu | 'divider'>;
+}
 
-const closeSidebar = () => {
-	sidebarOpen.update(() => false);
-};
-
-export { sidebarOpen, openSidebar, closeSidebar };
+export const sideBarStore = writable<SideMenuState>({
+	menu: [
+		{
+			icon: 'Home',
+			title: 'Inicio',
+			pathname: '/'
+		},
+		{
+			icon: 'Settings',
+			pathname: '/active-assets',
+			title: 'Mis activos digitales'
+		}
+	]
+});
