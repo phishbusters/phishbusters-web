@@ -11,6 +11,7 @@ import SideMenu from './side-menu/side-menu.svelte';
 import BoxContainer from './box-container/box-container.svelte';
 import * as icons from './icons';
 import * as formComponents from './form';
+import * as fileUpload from './file-upload';
 
 export {
 	AppLogo,
@@ -25,5 +26,6 @@ export {
 	ToolTip,
 	SideMenu,
 	BoxContainer,
-	formComponents
+	formComponents,
+	fileUpload
 };

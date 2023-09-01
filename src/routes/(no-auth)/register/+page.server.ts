@@ -61,7 +61,7 @@ export const actions: Actions = {
 		});
 
 		if (registerResponse.success) {
-			throw redirect(302, '/login');
+			throw redirect(307, '/login');
 		}
 
 		return fail(400, {

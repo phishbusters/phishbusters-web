@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const plugin = require('tailwindcss/plugin');
 const colors = require('tailwindcss/colors');
-const { parseColor } = require('tailwindcss/lib/util/color');
+const color = require('tailwindcss/lib/util/color');
+const { parseColor } = color;
 
 const toRGB = (value) => {
 	return parseColor(value).color.join(' ');

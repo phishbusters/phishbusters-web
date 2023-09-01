@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
 	import { sideBarStore } from '$lib/stores/sidebar';
 	import { slide } from 'svelte/transition';
 	import clsx from 'clsx';
@@ -21,9 +22,11 @@
 	}
 
 	onMount(() => {
-		window?.addEventListener('resize', () => {
-			windowWidth = window.innerWidth;
-		});
+		if (browser) {
+			window?.addEventListener('resize', () => {
+				windowWidth = window.innerWidth;
+			});
+		}
 	});
 </script>
 

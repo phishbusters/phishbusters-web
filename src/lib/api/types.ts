@@ -21,3 +21,13 @@ export type User = {
 export type Flag = {
 	shouldSeeOnboarding: boolean;
 };
+
+export enum AssetType {
+	Logo = 'Logo',
+	Image = 'Image',
+	URL = 'URL',
+	SocialNetworkUrl = 'SocialNetworkUrl',
+	Phone = 'phone',
+	Email = 'email',
+	PublicFaces = 'PublicFaces'
+}

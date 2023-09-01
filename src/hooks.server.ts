@@ -13,12 +13,16 @@ const getUserSessionData = async (jwt?: string): Promise<User | null> => {
 };
 
 export const handle = (async ({ event, resolve }) => {
-	const { cookies, locals } = event;
-	const jwt = cookies.get(jwtCookie);
-	const userData = await getUserSessionData(jwt);
-	if (userData) {
-		locals.user = userData;
-		locals.jwt = jwt;
+	try {
+		const { cookies, locals } = event;
+		const jwt = cookies.get(jwtCookie);
+		const userData = await getUserSessionData(jwt);
+		if (userData) {
+			locals.user = userData;
+			locals.jwt = jwt;
+		}
+	} catch {
+		// do nothing
 	}
 
 	return await resolve(event);

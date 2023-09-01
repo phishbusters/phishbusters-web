@@ -4,4 +4,7 @@
 	import './styles.css';
 </script>
 
+<svelte:head>
+	<title>Phishbusters</title>
+</svelte:head>
 <slot />

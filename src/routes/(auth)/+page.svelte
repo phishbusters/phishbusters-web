@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { Button } from '$lib/components';
+	import LineChart from '$lib/components/line-chart/line-chart.svelte';
+	import PieChart from '$lib/components/pie-chart/pie-chart.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -24,5 +26,23 @@
 		<Button on:click={navigateToOnboarding} variant="primary">Configurar activos digitales</Button>
 	</div>
 {:else}
-	<div>Futuro dashboard</div>
+	<div class="p-6 flex flex-col">
+		<div class="mb-4">
+			<h2 class="text-xl font-medium">Tu dashboard</h2>
+		</div>
+		<div class="w-full flex-1 flex flex-row items-start gap-12">
+			<div class="w-5/12 box p-6">
+				<div class="text-lg font-medium mt-2 mb-2">
+					Cantidad de impersofinifaciones y perfiles falsos detectados en el último mes
+				</div>
+				<LineChart height={400} />
+			</div>
+			<div class="w-5/12 box p-6">
+				<div class="text-lg font-medium mt-2 mb-2">
+					Redes sociales con más incidencias en el último mes
+				</div>
+				<PieChart height={400} />
+			</div>
+		</div>
+	</div>
 {/if}
