@@ -1,7 +1,21 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
-import tailWindColor from 'tailwindcss/lib/util/color';
-const { parseColor } = tailWindColor;
+
+const parseColor = (value: any) => {
+	if (value.charAt(0) === '#') {
+		const r = parseInt(value.substr(1, 2), 16);
+		const g = parseInt(value.substr(3, 2), 16);
+		const b = parseInt(value.substr(5, 2), 16);
+		return { r, g, b };
+	}
+
+	return { r: 0, g: 0, b: 0 };
+};
+
+const toRGB = (value: any) => {
+	const colorObject = parseColor(value);
+	return `${colorObject.r} ${colorObject.g} ${colorObject.b}`;
+};
 
 dayjs.extend(duration);
 
@@ -124,10 +138,6 @@ const randomNumbers = (from: number, to: number, length: number) => {
 	}
 
 	return numbers;
-};
-
-const toRGB = (value: string) => {
-	return parseColor(value).color.join(' ');
 };
 
 const stringToHTML = (arg: string) => {

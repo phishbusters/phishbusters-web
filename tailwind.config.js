@@ -1,14 +1,24 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const plugin = require('tailwindcss/plugin');
-const colors = require('tailwindcss/colors');
-const color = require('tailwindcss/lib/util/color');
-const { parseColor } = color;
+import plugin from 'tailwindcss/plugin';
+import colors from 'tailwindcss/colors';
+import forms from '@tailwindcss/forms';
 
-const toRGB = (value) => {
-	return parseColor(value).color.join(' ');
+const parseColor = (value) => {
+	if (value.charAt(0) === '#') {
+		const r = parseInt(value.substr(1, 2), 16);
+		const g = parseInt(value.substr(3, 2), 16);
+		const b = parseInt(value.substr(5, 2), 16);
+		return { r, g, b };
+	}
+
+	return { r: 0, g: 0, b: 0 };
 };
 
-module.exports = {
+const toRGB = (value) => {
+	const colorObject = parseColor(value);
+	return `${colorObject.r} ${colorObject.g} ${colorObject.b}`;
+};
+
+export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
@@ -92,7 +102,7 @@ module.exports = {
 		extend: {}
 	},
 	plugins: [
-		require('@tailwindcss/forms'),
+		forms(),
 		plugin(function ({ addBase, matchUtilities }) {
 			addBase({
 				// Default colors

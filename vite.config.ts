@@ -22,7 +22,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'tailwind-config': path.resolve(__dirname, './tailwind.config.cjs')
+			'tailwind-config': path.resolve(__dirname, './tailwind.config.js')
 		}
 	},
 	test: {
