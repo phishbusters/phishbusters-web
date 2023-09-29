@@ -11,12 +11,12 @@ const postHeaders = {
 };
 
 type Method = 'POST' | 'GET' | 'PUT' | 'DELETE' | 'PATCH';
-type Body = Record<string, unknown>;
 type ApiCallArgs = {
 	url: string;
 	method: Method;
 	jwt?: string;
-	body?: Body;
+	body?: any;
+	overrideHeaders?: HeadersInit | undefined;
 };
 
 type BasicResponse<T> = {
@@ -28,7 +28,8 @@ export const apiCall = async <T>({
 	url,
 	method,
 	jwt,
-	body
+	body,
+	overrideHeaders = {}
 }: ApiCallArgs): Promise<BasicResponse<T>> => {
 	const { apiUrl: apiUrl } = getConfig();
 	let absoluteUrl = url;
@@ -38,14 +39,16 @@ export const apiCall = async <T>({
 
 	const fullUrl = `${apiUrl}${absoluteUrl}`;
 	try {
+		const isFormData = body instanceof FormData;
 		process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 		const response = await fetch(fullUrl, {
 			method,
 			headers: {
-				...(['POST', 'PUT'].includes(method) ? postHeaders : getHeaders),
-				...((jwt && { Authorization: `Bearer ${jwt}` }) || {})
+				...(isFormData ? {} : ['POST', 'PUT'].includes(method) ? postHeaders : getHeaders),
+				...((jwt && { Authorization: `Bearer ${jwt}` }) || {}),
+				...overrideHeaders
 			},
-			body: body && JSON.stringify(body)
+			body: body && (isFormData ? body : JSON.stringify(body))
 		});
 
 		if (response.status === 401) {
@@ -66,7 +69,7 @@ export const apiCall = async <T>({
 
 			return {
 				success: false,
-				message: message || 'Unknown error'
+				message: message || 'Ha ocurrido un error inesperado.'
 			};
 		}
 
@@ -75,7 +78,7 @@ export const apiCall = async <T>({
 		console.log('ApiCall Error', error);
 		return {
 			success: false,
-			message: error?.message || 'Unknown error'
+			message: error?.message || 'Ha ocurrido un error inesperado.'
 		};
 	}
 };

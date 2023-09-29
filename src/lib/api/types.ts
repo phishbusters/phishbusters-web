@@ -32,12 +32,12 @@ export enum AssetType {
 	PublicFaces = 'PublicFaces'
 }
 
-export type ServerRequestItem = {
+export type DigitalAsset = {
 	assetType: AssetType;
 	value: string;
 };
 
-export type ServerRequestBody = {
+export type DigitalAssetRequestBody = {
 	companyName: string;
 	companyWebSite: string;
 	socialNetworks: {

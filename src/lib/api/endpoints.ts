@@ -2,9 +2,10 @@ import {
 	unauthenticatedPost,
 	authenticatedGet,
 	authenticatedPost,
-	authenticatedPut
+	authenticatedPut,
+	authenticatedFormPost
 } from './calls';
-import type { AssetType, Credentials, User } from './types';
+import type { AssetType, Credentials, DigitalAsset, User } from './types';
 
 export const session = {
 	login: async (email: string, password: string) =>
@@ -40,5 +41,7 @@ export const digitalAsset = {
 	create: async (jwt: string, digitalAsset: CreateDigitalAsset[]) =>
 		await authenticatedPost<{ assets: CreateDigitalAsset[] }>('/assets', jwt, {
 			newAssets: digitalAsset
-		})
+		}),
+	uploadImage: async (jwt: string, formData: FormData) =>
+		await authenticatedFormPost<DigitalAsset>('/assets/images', jwt, formData)
 };

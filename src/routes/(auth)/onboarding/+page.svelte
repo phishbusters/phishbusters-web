@@ -54,7 +54,6 @@
 
 		onboardingState.subscribe((value) => {
 			// localStorage.setItem('onboarding', JSON.stringify(value));
-			console.log(value);
 		});
 	});
 
@@ -120,7 +119,6 @@
 				const data = await response.json();
 				if (data.error) {
 					// Error en la API
-					console.log('error en la api');
 					return;
 				}
 
@@ -136,7 +134,6 @@
 				});
 			} else {
 				// Error en datos
-				console.log('error en datos');
 			}
 		} catch (err) {
 			console.log(err);
