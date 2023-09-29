@@ -14,9 +14,9 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		}
 
 		const formData = new FormData();
+		formData.append('file', file, file.name);
 		const upload = await apiEndpoints.digitalAsset.uploadImage(jwt, formData);
 		if (upload.success) {
-			console.log('Uploaded', upload);
 			return new Response(undefined, { status: 201 });
 		}
 
