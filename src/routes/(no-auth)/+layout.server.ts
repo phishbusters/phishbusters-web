@@ -4,7 +4,7 @@ import type { LayoutServerLoad } from './$types';
 export const load = (async ({ locals }) => {
 	const { jwt } = locals;
 	if (jwt) {
-		throw redirect(303, '/');
+		throw redirect(307, '/home');
 	}
 
 	return {};

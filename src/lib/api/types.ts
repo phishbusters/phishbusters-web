@@ -31,3 +31,21 @@ export enum AssetType {
 	Email = 'email',
 	PublicFaces = 'PublicFaces'
 }
+
+export type ServerRequestItem = {
+	assetType: AssetType;
+	value: string;
+};
+
+export type ServerRequestBody = {
+	companyName: string;
+	companyWebSite: string;
+	socialNetworks: {
+		twitter?: string;
+		instagram?: string;
+		facebook?: string;
+		linkedIn?: string;
+	};
+	phones: string[];
+	emails: string[];
+};

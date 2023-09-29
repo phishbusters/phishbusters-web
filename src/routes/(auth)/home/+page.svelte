@@ -3,11 +3,13 @@
 	import { Button } from '$lib/components';
 	import LineChart from '$lib/components/line-chart/line-chart.svelte';
 	import PieChart from '$lib/components/pie-chart/pie-chart.svelte';
+	import { stepper as onboardingState } from '$lib/stores/onboarding';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
 
 	function navigateToOnboarding() {
+		onboardingState.reset();
 		goto('/onboarding');
 	}
 </script>

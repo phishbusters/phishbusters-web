@@ -31,7 +31,7 @@ export const user = {
 		await authenticatedPut<User>('/user', jwt, updatedUser)
 };
 
-type CreateDigitalAsset = {
+export type CreateDigitalAsset = {
 	assetType: AssetType;
 	value: string;
 };

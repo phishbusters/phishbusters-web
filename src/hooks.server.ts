@@ -21,8 +21,8 @@ export const handle = (async ({ event, resolve }) => {
 			locals.user = userData;
 			locals.jwt = jwt;
 		}
-	} catch {
-		// do nothing
+	} catch (err) {
+		console.log(err);
 	}
 
 	return await resolve(event);

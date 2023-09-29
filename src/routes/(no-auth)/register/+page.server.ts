@@ -1,7 +1,18 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
 import { apiEndpoints } from '$lib/api';
 import { isValidEmail, isValidPassword } from '$lib/utils/validators';
+
+export const ssr = false;
+
+export const load = (async ({ locals }) => {
+	const { jwt } = locals;
+	if (jwt) {
+		throw redirect(307, '/');
+	}
+
+	return {};
+}) satisfies PageServerLoad;
 
 function sanitizeFormData(form: RegisterForm): RegisterForm {
 	return {

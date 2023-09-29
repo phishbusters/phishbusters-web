@@ -1,9 +1,8 @@
+import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
-export const load = (async ({ locals }) => {
-	const { user } = locals;
-	const showOnboarding = user?.flags?.shouldSeeOnboarding || false;
-	return {
-		showOnboarding
-	};
+export const ssr = false;
+
+export const load = (async () => {
+	throw redirect(308, '/home');
 }) satisfies PageServerLoad;

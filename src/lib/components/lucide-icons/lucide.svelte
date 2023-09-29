@@ -1,10 +1,35 @@
 <script context="module" lang="ts">
 	import type { SVGAttributes } from 'svelte/elements';
-	import * as lucideIcons from 'lucide-svelte';
+	import {
+		Info,
+		HeartPulse,
+		Network,
+		Mail,
+		Phone,
+		PictureInPicture,
+		Home,
+		Settings,
+		CheckCircle2,
+		Circle,
+		ArrowLeft
+	} from 'lucide-svelte';
 	import { twMerge } from 'tailwind-merge';
 
-	export type Icon = keyof typeof lucideIcons;
+	const selectedLucideIcons = {
+		Info,
+		HeartPulse,
+		Network,
+		Mail,
+		Phone,
+		PictureInPicture,
+		Home,
+		Settings,
+		CheckCircle2,
+		Circle,
+		ArrowLeft
+	};
 
+	export type Icon = keyof typeof selectedLucideIcons;
 	export interface LucideProps extends SVGAttributes<SVGSVGElement> {
 		className?: string;
 		icon: Icon;
@@ -19,6 +44,6 @@
 </script>
 
 <svelte:component
-	this={lucideIcons[icon]}
+	this={selectedLucideIcons[icon]}
 	class={twMerge(['stroke-[1.3] w-[1.4rem] h-[1.4rem]', className])}
 />

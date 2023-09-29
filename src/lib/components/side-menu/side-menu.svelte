@@ -10,7 +10,7 @@
 	import ToolTip from '../tool-tip/tool-tip.svelte';
 	import Lucide from '../lucide-icons/lucide.svelte';
 
-	let windowWidth = window.innerWidth;
+	let windowWidth = 0;
 
 	let formattedMenu: Array<FormattedMenu | 'divider'> = [];
 	const sideMenu = () => nestedMenu($sideBarStore.menu, $page.url);
@@ -23,6 +23,7 @@
 
 	onMount(() => {
 		if (browser) {
+			windowWidth = window.innerWidth;
 			window?.addEventListener('resize', () => {
 				windowWidth = window.innerWidth;
 			});

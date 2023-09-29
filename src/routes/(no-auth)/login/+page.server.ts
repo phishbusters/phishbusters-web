@@ -2,7 +2,18 @@ import { apiEndpoints } from '$lib/api';
 import { newSession } from '$lib/server/cookie-manager';
 import { isValidEmail } from '$lib/utils/validators';
 import { redirect } from '@sveltejs/kit';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
+
+export const ssr = false;
+
+export const load = (async ({ locals }) => {
+	const { jwt } = locals;
+	if (jwt) {
+		throw redirect(307, '/home');
+	}
+
+	return {};
+}) satisfies PageServerLoad;
 
 export const actions: Actions = {
 	default: async ({ cookies, request }) => {
