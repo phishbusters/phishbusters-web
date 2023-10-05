@@ -141,7 +141,7 @@
 	}
 
 	function goToDashboard() {
-		goto('/home');
+		goto('/');
 	}
 </script>
 

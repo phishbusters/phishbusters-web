@@ -45,3 +45,21 @@ export const digitalAsset = {
 	uploadImage: async (jwt: string, formData: FormData) =>
 		await authenticatedFormPost<DigitalAsset>('/assets/images', jwt, formData)
 };
+
+interface PhishingStatsResponse {
+	sinceCreation: {
+		totalPhishingChats: number;
+		totalFakeProfiles: number;
+		totalComplaints: number;
+	};
+	lastSevenDays: {
+		date: Date;
+		phishingChatsDetected: number;
+		fakeProfilesDetected: number;
+		complaintsExecuted: number;
+	}[];
+}
+
+export const phishingStats = {
+	get: async (jwt: string) => await authenticatedGet<PhishingStatsResponse>('/phishing-stats', jwt)
+};

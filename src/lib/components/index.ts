@@ -12,9 +12,19 @@ import BoxContainer from './box-container/box-container.svelte';
 import * as icons from './icons';
 import * as formComponents from './form';
 import * as fileUpload from './file-upload';
+import BarChart from './bar-chart/bar-chart.svelte';
+import LineChart from './line-chart/line-chart.svelte';
+import PieChart from './pie-chart/pie-chart.svelte';
+import StackedBarChart from './stacked-bar-chart/stacked-bar-chart.svelte';
+import TopBar from './top-bar/top-bar.svelte';
 
 export {
 	AppLogo,
+	BarChart,
+	LineChart,
+	PieChart,
+	TopBar,
+	StackedBarChart,
 	LoadingIcon,
 	Input,
 	CheckBox,

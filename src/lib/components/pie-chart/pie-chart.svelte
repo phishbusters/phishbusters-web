@@ -9,7 +9,7 @@
 
 	export { width, height, className as class };
 
-	const chartData = [15, 10, 65];
+	const chartData = [15, 65];
 	const chartColors = () => [
 		getColor('pending', 0.9),
 		getColor('warning', 0.9),
@@ -20,7 +20,7 @@
 	let options: ChartOptions<'pie'>;
 
 	$: data = {
-		labels: ['Linkedin', 'Instagram', 'Twitter'],
+		labels: ['Validados por usuarios', 'Detectados por el sistema'],
 		datasets: [
 			{
 				data: chartData,

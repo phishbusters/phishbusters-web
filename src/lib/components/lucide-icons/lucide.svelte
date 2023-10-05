@@ -11,7 +11,10 @@
 		Settings,
 		CheckCircle2,
 		Circle,
-		ArrowLeft
+		ArrowLeft,
+		Ban,
+		UserX,
+		MessageSquare
 	} from 'lucide-svelte';
 	import { twMerge } from 'tailwind-merge';
 
@@ -26,7 +29,10 @@
 		Settings,
 		CheckCircle2,
 		Circle,
-		ArrowLeft
+		ArrowLeft,
+		Ban,
+		UserX,
+		MessageSquare
 	};
 
 	export type Icon = keyof typeof selectedLucideIcons;
