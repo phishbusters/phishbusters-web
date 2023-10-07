@@ -24,6 +24,11 @@ export const sideBarStore = writable<SideMenuState>({
 			icon: 'Settings',
 			pathname: '/active-assets',
 			title: 'Mis activos digitales'
+		},
+		{
+			icon: 'LogOut',
+			pathname: '/logout',
+			title: 'Cerrar sesión'
 		}
 	]
 });

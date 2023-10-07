@@ -26,6 +26,23 @@
 		item.complaintsNotExecuted = 10;
 		return item;
 	});
+
+	const effectivenessRate = test.reduce(
+		(acc, item) => {
+			acc.totalComplaints += item.complaintsExecuted + item.complaintsNotExecuted;
+			acc.successfulComplaints += item.complaintsExecuted;
+			return acc;
+		},
+		{ totalComplaints: 0, successfulComplaints: 0 }
+	);
+
+	const effectivenessRatePercentage =
+		effectivenessRate.successfulComplaints === 0 || effectivenessRate.totalComplaints === 0
+			? 0
+			: (effectivenessRate.successfulComplaints / effectivenessRate.totalComplaints) * 100;
+
+	const effectivenessRatePercentageFormatted = effectivenessRatePercentage.toFixed(2) + '%';
+
 	function navigateToOnboarding() {
 		onboardingState.reset();
 		goto('/onboarding');
@@ -167,7 +184,9 @@
 				<div class="flex flex-col md:flex-row md:items-center">
 					<div class="flex">
 						<div>
-							<div class="text-lg font-medium text-primary dark:text-slate-300 xl:text-xl">30%</div>
+							<div class="text-lg font-medium text-primary dark:text-slate-300 xl:text-xl">
+								{effectivenessRatePercentageFormatted}
+							</div>
 							<div class="mt-0.5 text-slate-500">Porcentaje de efectividad</div>
 						</div>
 						<div
