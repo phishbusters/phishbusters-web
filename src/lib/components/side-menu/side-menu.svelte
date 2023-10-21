@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import { sideBarStore } from '$lib/stores/sidebar';
-	import { slide } from 'svelte/transition';
 	import clsx from 'clsx';
 	import { onMount } from 'svelte';
 	import { AppLogo } from '$lib/components';
@@ -93,10 +92,7 @@
 						</div>
 					</ToolTip>
 					{#if menu.subMenu && menu.activeDropdown}
-						<ul
-							class={clsx([menu.activeDropdown && 'side-menu__sub-open'])}
-							transition:slide|local={{ duration: 300 }}
-						>
+						<ul class={clsx([menu.activeDropdown && 'side-menu__sub-open'])}>
 							{#each menu.subMenu as subMenu, subMenuKey}
 								<li>
 									<ToolTip
@@ -141,10 +137,7 @@
 										</div>
 									</ToolTip>
 									{#if subMenu.subMenu && subMenu.activeDropdown}
-										<ul
-											class={clsx([subMenu.activeDropdown && 'side-menu__sub-open'])}
-											transition:slide|local={{ duration: 300 }}
-										>
+										<ul class={clsx([subMenu.activeDropdown && 'side-menu__sub-open'])}>
 											{#each subMenu.subMenu as lastSubMenu, lastSubMenuKey}
 												<li>
 													<ToolTip

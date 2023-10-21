@@ -9,6 +9,7 @@ export type CompanyData = {
 	subscriptionStatus: 'Active' | 'Inactive';
 	digitalAssets: unknown[];
 	clients: unknown[];
+	authorizationStatus: 'pending' | 'accepted';
 };
 
 export type User = {
@@ -35,6 +36,13 @@ export enum AssetType {
 export type DigitalAsset = {
 	assetType: AssetType;
 	value: string;
+	_id?: string;
+};
+
+export type ServerDigitalAsset = {
+	assetType: AssetType;
+	assetContent: string;
+	_id: string;
 };
 
 export type DigitalAssetRequestBody = {

@@ -18,9 +18,12 @@
 		transformDataToLineChart,
 		transformDataToStackedBarChart
 	} from '$lib/utils/chart-utils';
+	import Alert from '$lib/components/alert/alert.svelte';
+	import Link from '$lib/components/link/link.svelte';
 
 	export let data: PageData;
 
+	let validatedUserSign = false;
 	let test = data.stats.lastSevenDays.concat();
 	test = test.map((item) => {
 		item.complaintsNotExecuted = 10;
@@ -47,6 +50,16 @@
 		onboardingState.reset();
 		goto('/onboarding');
 	}
+
+	function validateUserSign() {
+		fetch('/api/validate-user-sign', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		}).then(() => (validatedUserSign = true));
+	}
 </script>
 
 {#if data.showOnboarding}
@@ -63,6 +76,15 @@
 		<Button on:click={navigateToOnboarding} variant="primary">Configurar activos digitales</Button>
 	</div>
 {:else}
+	{#if data.showSignAlert && !validatedUserSign}
+		<div>
+			<Alert variant="pending" class="mb-2">
+				Para poder representarte frente a las redes sociales y ejecutar denuncias en tu nombre,
+				necesitamos que aceptes nuestra Carta Política.
+				<Link label="Haga click aqui para autorizarnos" onClick={validateUserSign} />
+			</Alert>
+		</div>
+	{/if}
 	<div class="p-6 flex flex-col">
 		<div class="col-span-12 mt-8">
 			<div class="flex items-center h-10 intro-y">
