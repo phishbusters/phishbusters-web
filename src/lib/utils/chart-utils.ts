@@ -59,18 +59,18 @@ export const toDataSet = (
 
 const colors = [
 	getColor('primary'),
+	getColor('emerald.500'),
 	getColor('slate.500'),
-	getColor('secondary'),
-	getColor('slate.200')
+	getColor('sky.500')
 ];
 
-const lineChartConfigs = {
+const lineChartConfigs = (index: number) => ({
 	borderWidth: 2,
 	borderColor: getColor('primary'),
-	backgroundColor: 'transparent',
+	backgroundColor: colors[index],
 	pointBorderColor: 'transparent',
 	tension: 0.4
-};
+});
 
 const stackedBarChartConfig = (index: number) => ({
 	barPercentage: 0.5,
@@ -80,14 +80,64 @@ const stackedBarChartConfig = (index: number) => ({
 	backgroundColor: colors[index]
 });
 
-export const transformDataToLineChart = (dataset: DataSet) => {
+const chartColors = () => [
+	getColor('pending', 0.9),
+	getColor('warning', 0.9),
+	getColor('primary', 0.9)
+];
+export const transformDataToPieChart = (chartData: any[], labels: string[]) => {
+	return {
+		labels: labels,
+		datasets: [
+			{
+				data: chartData,
+				backgroundColor: chartColors(),
+				hoverBackgroundColor: chartColors(),
+				borderWidth: 5,
+				borderColor: getColor('darkmode.700')
+			}
+		]
+	};
+};
+
+export const transformToSingularBarChart = (
+	value1: { value: any; label: string },
+	value2: { value: any; label: string },
+	labels: string[]
+) => {
+	return {
+		labels,
+		datasets: [
+			{
+				label: value1.label,
+				barPercentage: 0.5,
+				barThickness: 200,
+				maxBarThickness: 200,
+				minBarLength: 2,
+				data: [value1.value],
+				backgroundColor: getColor('primary')
+			},
+			{
+				label: value2.label,
+				barPercentage: 0.5,
+				barThickness: 200,
+				maxBarThickness: 200,
+				minBarLength: 2,
+				data: [value2.value],
+				backgroundColor: getColor('slate.300')
+			}
+		]
+	};
+};
+
+export const transformDataToLineChartWithDataset = (dataset: DataSet) => {
 	return {
 		labels: dataset.xLabels,
-		datasets: dataset.dataSets.map((dSet) => {
+		datasets: dataset.dataSets.map((dSet, index) => {
 			return {
 				label: dSet.label,
 				data: dSet.data,
-				...lineChartConfigs
+				...lineChartConfigs(index)
 			};
 		})
 	};
@@ -100,7 +150,7 @@ export const transformDataToStackedBarChart = (dataset: DataSet) => {
 			return {
 				label: dSet.label,
 				data: dSet.data,
-				...stackedBarChartConfig(index)
+				...stackedBarChartConfig(dataset.dataSets.length - index - 1)
 			};
 		})
 	};

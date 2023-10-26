@@ -6,8 +6,9 @@
 	let width: number | undefined = undefined;
 	let height: number | undefined = undefined;
 	let className: string | undefined = undefined;
+	let data: ChartData;
 
-	export { width, height, className as class };
+	export { width, height, className as class, data };
 
 	const chartData = [15, 65];
 	const chartColors = () => [
@@ -16,21 +17,22 @@
 		getColor('primary', 0.9)
 	];
 
-	let data: ChartData;
 	let options: ChartOptions<'pie'>;
 
-	$: data = {
-		labels: ['Validados por usuarios', 'Detectados por el sistema'],
-		datasets: [
-			{
-				data: chartData,
-				backgroundColor: chartColors(),
-				hoverBackgroundColor: chartColors(),
-				borderWidth: 5,
-				borderColor: getColor('darkmode.700')
-			}
-		]
-	};
+	if (!data) {
+		data = {
+			labels: ['Validados por usuarios', 'Detectados por el sistema'],
+			datasets: [
+				{
+					data: chartData,
+					backgroundColor: chartColors(),
+					hoverBackgroundColor: chartColors(),
+					borderWidth: 5,
+					borderColor: getColor('darkmode.700')
+				}
+			]
+		};
+	}
 
 	$: options = {
 		maintainAspectRatio: false,

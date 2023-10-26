@@ -13,6 +13,11 @@ export const load = (async ({ locals }) => {
 	const showOnboarding = user?.flags?.shouldSeeOnboarding || false;
 	const showSignAlert = user?.company?.authorizationStatus === 'pending';
 	const phishingStats = (await apiEndpoints.phishingStats.get(jwt)).data;
+	phishingStats?.lastSevenDays.map((day) => {
+		// We need a variable for the graph on the view to know how many are not executed
+		// Either created or in progress
+		day.complaintsNotExecuted = day.complaintsCreated + day.complaintsInProgress;
+	});
 
 	return {
 		showOnboarding,
@@ -24,7 +29,18 @@ export const load = (async ({ locals }) => {
 				totalComplaints: 0,
 				successFullComplaints: 0
 			},
-			lastSevenDays: []
+			lastSevenDays: [],
+			detectionAmount: {
+				detectedBySystem: 0,
+				detectedByUser: 0
+			},
+			falsePositiveAndInteractions: {
+				falsePositiveCount: 0,
+				positivesCount: 0,
+				interactionRateForFalsePositive: 0,
+				interactionRateForPositives: 0,
+				interactionRates: []
+			}
 		}
 	};
 }) satisfies PageServerLoad;

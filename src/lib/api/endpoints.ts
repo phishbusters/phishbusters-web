@@ -54,14 +54,35 @@ interface PhishingStatsResponse {
 	sinceCreation: {
 		totalPhishingChats: number;
 		totalFakeProfiles: number;
-		totalComplaints: number;
+		totalComplaintsClosed: number;
+		totalComplaintsCreated: number;
+		totalComplaintsInProgress: number;
 	};
 	lastSevenDays: {
 		date: Date;
 		phishingChatsDetected: number;
 		fakeProfilesDetected: number;
-		complaintsExecuted: number;
+		complaintsClosed: number;
+		complaintsCreated: number;
+		complaintsInProgress: number;
+		complaintsNotExecuted?: number;
 	}[];
+	falsePositiveAndInteractions: {
+		falsePositiveCount: number;
+		positivesCount: number;
+		interactionRateForFalsePositive: number;
+		interactionRateForPositives: number;
+		interactionRates: {
+			date: Date;
+			interactionRateGeneral: number;
+			interactionRateForFalsePositive: number;
+			interactionRateForPositives: number;
+		}[];
+	};
+	detectionAmount: {
+		detectedBySystem: number;
+		detectedByUser: number;
+	};
 }
 
 export const phishingStats = {

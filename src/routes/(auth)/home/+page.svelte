@@ -15,25 +15,20 @@
 		parseDateTommDDyyyy,
 		toDataSet,
 		toMultipleDataSet,
-		transformDataToLineChart,
-		transformDataToStackedBarChart
+		transformDataToLineChartWithDataset,
+		transformDataToPieChart,
+		transformDataToStackedBarChart,
+		transformToSingularBarChart
 	} from '$lib/utils/chart-utils';
 	import Alert from '$lib/components/alert/alert.svelte';
 	import Link from '$lib/components/link/link.svelte';
 
 	export let data: PageData;
-
-	let validatedUserSign = false;
-	let test = data.stats.lastSevenDays.concat();
-	test = test.map((item) => {
-		item.complaintsNotExecuted = 10;
-		return item;
-	});
-
-	const effectivenessRate = test.reduce(
+	const effectivenessRate = data.stats.lastSevenDays.reduce(
 		(acc, item) => {
-			acc.totalComplaints += item.complaintsExecuted + item.complaintsNotExecuted;
-			acc.successfulComplaints += item.complaintsExecuted;
+			acc.totalComplaints +=
+				item.complaintsClosed + item.complaintsCreated + item.complaintsInProgress;
+			acc.successfulComplaints += item.complaintsClosed;
 			return acc;
 		},
 		{ totalComplaints: 0, successfulComplaints: 0 }
@@ -70,7 +65,7 @@
 		<Button on:click={navigateToOnboarding} variant="primary">Configurar activos digitales</Button>
 	</div>
 {:else}
-	{#if data.showSignAlert && !validatedUserSign}
+	{#if data.showSignAlert}
 		<div>
 			<Alert variant="pending" class="mb-2">
 				Para poder representarte frente a las redes sociales y ejecutar denuncias en tu nombre,
@@ -92,7 +87,7 @@
 								<LucideIcons icon="Ban" class="w-[28px] h-[28px] text-primary" />
 							</div>
 							<div class="mt-6 text-3xl font-medium leading-8">
-								{data.stats.sinceCreation.totalFakeProfiles}
+								{effectivenessRate.totalComplaints}
 							</div>
 							<div class="mt-1 text-base text-slate-500">Cantidad de Take Downs</div>
 						</div>
@@ -105,7 +100,7 @@
 								<LucideIcons icon="UserX" class="w-[28px] h-[28px] text-pending" />
 							</div>
 							<div class="mt-6 text-3xl font-medium leading-8">
-								{data.stats.sinceCreation.totalPhishingChats}
+								{data.stats.sinceCreation.totalFakeProfiles}
 							</div>
 							<div class="mt-1 text-base text-slate-500">Cantidad de Perfiles Falsos</div>
 						</div>
@@ -118,7 +113,7 @@
 								<LucideIcons icon="MessageSquare" class="w-[28px] h-[28px] text-warning" />
 							</div>
 							<div class="mt-6 text-3xl font-medium leading-8">
-								{data.stats.sinceCreation.totalComplaints}
+								{data.stats.sinceCreation.totalPhishingChats}
 							</div>
 							<div class="mt-1 text-base text-slate-500">Intentos de Phishing por Chat</div>
 						</div>
@@ -143,7 +138,7 @@
 					])}
 				>
 					<LineChart
-						data={transformDataToLineChart(
+						data={transformDataToLineChartWithDataset(
 							toDataSet(
 								data.stats.lastSevenDays,
 								'date',
@@ -174,7 +169,7 @@
 					])}
 				>
 					<LineChart
-						data={transformDataToLineChart(
+						data={transformDataToLineChartWithDataset(
 							toDataSet(
 								data.stats.lastSevenDays,
 								'date',
@@ -220,9 +215,9 @@
 					<StackedBarChart
 						data={transformDataToStackedBarChart(
 							toMultipleDataSet(
-								test,
+								data.stats.lastSevenDays,
 								'date',
-								['complaintsExecuted', 'complaintsNotExecuted'],
+								['complaintsClosed', 'complaintsNotExecuted'],
 								[
 									'Cantidad de take downs realizados con exito',
 									'Cantidad de take downs realizados sin exito'
@@ -251,7 +246,16 @@
 						"after:content-[''] after:block after:absolute after:w-16 after:right-0 after:top-0 after:bottom-0 after:mb-7 after:bg-gradient-to-l after:from-white after:via-white/80 after:to-transparent after:dark:from-darkmode-600"
 					])}
 				>
-					<PieChart height={400} />
+					<PieChart
+						data={transformDataToPieChart(
+							[
+								data.stats.detectionAmount.detectedBySystem,
+								data.stats.detectionAmount.detectedByUser
+							],
+							['Detectados por el sistema', 'Validados por usuarios']
+						)}
+						height={400}
+					/>
 				</div>
 			</div>
 		</div>
@@ -271,7 +275,20 @@
 						"after:content-[''] after:block after:absolute after:w-16 after:right-0 after:top-0 after:bottom-0 after:mb-7 after:bg-gradient-to-l after:from-white after:via-white/80 after:to-transparent after:dark:from-darkmode-600"
 					])}
 				>
-					<BarChart height={400} />
+					<BarChart
+						data={transformToSingularBarChart(
+							{
+								value: data.stats.falsePositiveAndInteractions.falsePositiveCount,
+								label: 'Falsos Positivos Detectados'
+							},
+							{
+								value: data.stats.falsePositiveAndInteractions.positivesCount,
+								label: 'Positivos Detectados'
+							},
+							['']
+						)}
+						height={400}
+					/>
 				</div>
 			</div>
 		</div>
@@ -291,7 +308,25 @@
 						"after:content-[''] after:block after:absolute after:w-16 after:right-0 after:top-0 after:bottom-0 after:mb-7 after:bg-gradient-to-l after:from-white after:via-white/80 after:to-transparent after:dark:from-darkmode-600"
 					])}
 				>
-					<LineChart height={400} />
+					<LineChart
+						data={transformDataToLineChartWithDataset(
+							toMultipleDataSet(
+								data.stats.falsePositiveAndInteractions.interactionRates,
+								'date',
+								[
+									'interactionRateGeneral',
+									'interactionRateForFalsePositive',
+									'interactionRateForPositives'
+								],
+								[
+									'Tasa de interacción',
+									'Tasa de interacción para falsos positivos',
+									'Tasa de interacción para positivos'
+								]
+							)
+						)}
+						height={400}
+					/>
 				</div>
 			</div>
 		</div>
