@@ -1,3 +1,4 @@
+import type { SignServerRequest } from '../../routes/api/validate-user-sign/+server';
 import {
 	unauthenticatedPost,
 	authenticatedGet,
@@ -30,7 +31,8 @@ export const user = {
 		await unauthenticatedPost<{ user: User }>('/user', newUser),
 	update: async (jwt: string, updatedUser: UpdateUser) =>
 		await authenticatedPut<User>('/user', jwt, updatedUser),
-	validateUserSign: async (jwt: string) => await authenticatedPost('/user/sign-auth', jwt, {})
+	validateUserSign: async (jwt: string, data: SignServerRequest) =>
+		await authenticatedPost('/user/sign-auth', jwt, data)
 };
 
 export type CreateDigitalAsset = {

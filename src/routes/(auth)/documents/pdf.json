@@ -1,0 +1,24 @@
+{
+	"header": "Autorización para Actuar en Nuestro Nombre",
+	"body": [
+		"Compañía {companyName}",
+		"Dirección: {address}",
+		"Teléfono: {phone}",
+		"Correo Electrónico: {email}",
+		"Fecha: {today}",
+		"Estimados representantes de Phish Buster,",
+		"Por la presente, nosotros, {companyName}, con dirección en {address}, autorizamos a Phish Buster actuar en nuestro nombre para llevar a cabo las siguientes actividades:",
+		"1. Denunciar y gestionar casos de phishing o suplantación de identidad que involucren a nuestra compañía o a nuestros empleados.",
+		"2. Comunicarse con las plataformas pertinentes para resolver los casos de phishing o suplantación de identidad.",
+		"3. Cualquier otra actividad relacionada con la seguridad cibernética que sea de interés para nuestra compañía.",
+		" ",
+		"Esta autorización es válida desde la fecha de este documento hasta {renewalDate}.",
+		"Nos reservamos el derecho de revocar esta autorización en cualquier momento mediante una notificación escrita a Phish Buster.",
+		"Atentamente,",
+		" ",
+		" ",
+		" ",
+		"{legalName}",
+		"{legalTitle}"
+	]
+}

@@ -54,6 +54,9 @@
 		"flat": "^5.0.2",
 		"lucide": "^0.271.0",
 		"lucide-svelte": "^0.271.0",
+		"pdf-lib": "^1.17.1",
+		"signature_pad": "^4.1.6",
+		"svelte-pdf": "^1.0.20",
 		"sweetalert2": "^11.7.27",
 		"tippy.js": "^6.3.7"
 	},

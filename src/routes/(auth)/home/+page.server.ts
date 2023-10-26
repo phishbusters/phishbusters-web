@@ -12,7 +12,6 @@ export const load = (async ({ locals }) => {
 
 	const showOnboarding = user?.flags?.shouldSeeOnboarding || false;
 	const showSignAlert = user?.company?.authorizationStatus === 'pending';
-	console.log('showSignAlert', showSignAlert, user?.company?.authorizationStatus);
 	const phishingStats = (await apiEndpoints.phishingStats.get(jwt)).data;
 
 	return {

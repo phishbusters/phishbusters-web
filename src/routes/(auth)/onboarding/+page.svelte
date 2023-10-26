@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Swal from 'sweetalert2';
-	import { goto } from '$app/navigation';
+	import { goto, invalidateAll } from '$app/navigation';
 	import { stepper as onboardingState, type StepData } from '$lib/stores/onboarding';
 	import {
 		LucideIcons,
@@ -130,6 +130,7 @@
 				}).then((result) => {
 					if (result.isConfirmed) {
 						goToDashboard();
+						invalidateAll();
 					}
 				});
 			} else {

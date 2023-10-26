@@ -52,13 +52,7 @@
 	}
 
 	function validateUserSign() {
-		fetch('/api/validate-user-sign', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(data)
-		}).then(() => (validatedUserSign = true));
+		goto('/documents');
 	}
 </script>
 

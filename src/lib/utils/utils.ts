@@ -30,7 +30,7 @@ const cutText = (text: string, length: number) => {
 	}
 };
 
-const formatDate = (date: string, format: string) => {
+const formatDate = (date: Date, format: string) => {
 	return dayjs(date).format(format);
 };
 

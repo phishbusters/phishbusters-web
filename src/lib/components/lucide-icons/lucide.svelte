@@ -15,7 +15,8 @@
 		Ban,
 		UserX,
 		MessageSquare,
-		LogOut
+		LogOut,
+		FileText
 	} from 'lucide-svelte';
 	import { twMerge } from 'tailwind-merge';
 
@@ -34,7 +35,8 @@
 		Ban,
 		UserX,
 		MessageSquare,
-		LogOut
+		LogOut,
+		FileText
 	};
 
 	export type Icon = keyof typeof selectedLucideIcons;

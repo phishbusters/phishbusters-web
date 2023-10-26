@@ -55,3 +55,7 @@ export function isValidPassword(password: string): boolean {
 		password.toUpperCase() !== password
 	);
 }
+
+export const isEmpty = (value: string): boolean => {
+	return value.trim().length === 0;
+};
