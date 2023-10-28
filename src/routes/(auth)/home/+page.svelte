@@ -89,7 +89,7 @@
 							<div class="mt-6 text-3xl font-medium leading-8">
 								{effectivenessRate.totalComplaints}
 							</div>
-							<div class="mt-1 text-base text-slate-500">Cantidad de Take Downs</div>
+							<div class="mt-1 text-base text-slate-500">Cantidad de take downs totales</div>
 						</div>
 					</div>
 				</div>
