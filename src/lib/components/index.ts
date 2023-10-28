@@ -17,6 +17,7 @@ import LineChart from './line-chart/line-chart.svelte';
 import PieChart from './pie-chart/pie-chart.svelte';
 import StackedBarChart from './stacked-bar-chart/stacked-bar-chart.svelte';
 import TopBar from './top-bar/top-bar.svelte';
+import Table from './table';
 
 export {
 	AppLogo,
@@ -36,6 +37,7 @@ export {
 	ToolTip,
 	SideMenu,
 	BoxContainer,
+	Table,
 	formComponents,
 	fileUpload
 };

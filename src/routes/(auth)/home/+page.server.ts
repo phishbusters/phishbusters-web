@@ -1,5 +1,5 @@
 import { apiEndpoints } from '$lib/api';
-import { redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const ssr = false;
@@ -7,7 +7,8 @@ export const ssr = false;
 export const load = (async ({ locals }) => {
 	const { user, jwt } = locals;
 	if (!jwt) {
-		throw redirect(307, '/login');
+		console.log('jwt', jwt, 'user', user);
+		throw error(401, 'Parece que la pagina que intenta ver no es accesible.');
 	}
 
 	const showOnboarding = user?.flags?.shouldSeeOnboarding || false;

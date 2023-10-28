@@ -88,3 +88,16 @@ interface PhishingStatsResponse {
 export const phishingStats = {
 	get: async (jwt: string) => await authenticatedGet<PhishingStatsResponse>('/phishing-stats', jwt)
 };
+
+type Complaints = {
+	id: string;
+	status: 'Created' | 'Open' | 'Closed';
+	profileId: string;
+	createdAt: Date;
+	updatedAt: Date;
+};
+
+export const complaints = {
+	get: async (jwt: string) =>
+		await authenticatedGet<{ complaints: Complaints[] }>('/take-downs', jwt)
+};

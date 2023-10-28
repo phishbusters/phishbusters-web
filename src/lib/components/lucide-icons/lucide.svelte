@@ -16,7 +16,8 @@
 		UserX,
 		MessageSquare,
 		LogOut,
-		FileText
+		FileText,
+		RadarIcon
 	} from 'lucide-svelte';
 	import { twMerge } from 'tailwind-merge';
 
@@ -36,7 +37,8 @@
 		UserX,
 		MessageSquare,
 		LogOut,
-		FileText
+		FileText,
+		RadarIcon
 	};
 
 	export type Icon = keyof typeof selectedLucideIcons;

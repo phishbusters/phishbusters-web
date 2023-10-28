@@ -26,6 +26,11 @@ export const sideBarStore = writable<SideMenuState>({
 			pathname: '/documents'
 		},
 		{
+			icon: 'RadarIcon',
+			pathname: '/take-downs',
+			title: 'Perfiles identificados'
+		},
+		{
 			icon: 'Settings',
 			pathname: '/active-assets',
 			title: 'Mis activos digitales'

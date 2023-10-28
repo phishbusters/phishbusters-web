@@ -1,5 +1,5 @@
 import { apiEndpoints } from '$lib/api';
-import { redirect } from '@sveltejs/kit';
+import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { AssetType, type ServerDigitalAsset } from '$lib/api/types';
 
@@ -20,7 +20,8 @@ type GroupedAssets = {
 export const load = (async ({ locals }) => {
 	const { jwt, user } = locals;
 	if (!jwt) {
-		throw redirect(307, '/login');
+		console.log('jwt', jwt, 'user', user);
+		throw error(401, 'Parece que la pagina que intenta ver no es accesible.');
 	}
 
 	const activeAssets = (await apiEndpoints.digitalAsset.get(jwt)).data || [];
